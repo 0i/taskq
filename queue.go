@@ -71,6 +71,9 @@ type QueueOptions struct {
 	// We can change it to a bigger value so that it won't slowdown the redis when using redis queue.
 	// It will be between SchedulerBackoffTime and SchedulerBackoffTime+250ms.
 	SchedulerBackoffTime time.Duration
+
+	// IgnoreSystemResources true will not check free system resources
+	IgnoreSystemResources bool
 }
 
 func (opt *QueueOptions) Init() {
@@ -135,7 +138,7 @@ func (opt *QueueOptions) Init() {
 	}
 }
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 type Queue interface {
 	fmt.Stringer

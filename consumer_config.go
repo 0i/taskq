@@ -56,7 +56,7 @@ func (p *perfProfile) Timing() time.Duration {
 	return p.timing
 }
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 type consumerConfig struct {
 	NumFetcher int32
@@ -102,7 +102,7 @@ func (cfg *consumerConfig) Clone() *consumerConfig {
 	}
 }
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 type configRoulette struct {
 	opt *QueueOptions
@@ -245,7 +245,7 @@ func (r *configRoulette) genConfigs(bestCfg *consumerConfig, queueEmpty bool) {
 	r.oldBestCfg = bestCfg.Clone()
 	r.addConfig(r.oldBestCfg)
 
-	if !hasFreeSystemResources() {
+	if !r.opt.IgnoreSystemResources && !hasFreeSystemResources() {
 		internal.Logger.Println("taskq: system does not have enough free resources")
 		return
 	}
